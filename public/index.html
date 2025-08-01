@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search It!</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="shortcut icon" href="./assets/logo.png" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Alumni+Sans+SC:ital,wght@0,100..900;1,100..900&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.lineicons.com/5.0/lineicons.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="main.js"></script>
+</head>
+<body>
+    <div class="loader_holder">
+        <span class="logo"></span>
+    </div>
+    <div class="momo_number_holder">
+        <div class="number_snippet">
+            <div class="buy_it">
+                <i class="lni lni-coffee-cup-2"></i>
+                <p>Buy me coffee</p>
+            </div>
+            <button><i class="lni lni-xmark"></i></button>
+            <p class="number">*182*1*1*0791513493*Amount#</p>
+        </div>
+    </div>
+    <div class="logo_holder">
+        <a href="" class="hold_me">
+            <span class="logo"></span>
+            <p>MoviePin!</p>
+        </a>
+        <div class="buy_it">
+            <p>Wanna Buy me coffee?</p>
+            <button class="open_it">
+                <i class="lni lni-coffee-cup-2"></i>
+            </button>
+        </div>
+    </div>
+    <div class="search_bar_container">
+        <div class="text_above">
+            <h1>Discover movies with ease!</h1>
+            <p>Dive into a captivating world filled with your all-time favorite movies — from heartwarming classics and thrilling adventures to laugh-out-loud comedies and powerful dramas.</p>
+        </div>
+        <form id="searchForm">
+            <input type="text" id="searchInput" placeholder="Search for something..." required>
+            <button type="submit"><span class="logo"></span></button>
+        </form>
+    </div>
+    <div class="results_container">
+        <p class="results_title">Results for "Nothing"</p>
+        <div class="results_cards_holder">
+        </div>
+        <p class="ribbon">
+            All movies are loaded!
+        </p>
+    </div>
+    <div class="footer">
+        <p><span class="logo"></span> 2025 MoviePin. All rights reserved.</p>
+        <p><span class="stalwart"></span> Powered by stalwart</p>
+    </div>
+<script>
+    const formbutton = document.querySelector('.search_bar_container form button');
+    const formbuttonicon = document.querySelector('.search_bar_container form button span.logo');
+    const morebutton = document.querySelectorAll('.more_btn');
+    const logoHolder = document.querySelector('.logo_holder');
+    const resultsCardsHolder = document.querySelector('.results_cards_holder');
+    const closebuy = document.querySelector('.number_snippet button');
+    const buysnippet = document.querySelector('.number_snippet');
+    const buysnippetback = document.querySelector('.momo_number_holder');
+    const openit = document.querySelector('.open_it');
+
+    function openModal() {
+        buysnippetback.style.visibility = 'visible';
+        buysnippetback.style.opacity = '1';
+    
+        buysnippet.classList.remove('bounce_it', 'bounce_out');
+        void buysnippet.offsetWidth;
+        buysnippet.classList.add('bounce_it');
+    }
+
+    function closeModal() {
+        buysnippet.classList.remove('bounce_it', 'bounce_out');
+        void buysnippet.offsetWidth;
+        buysnippet.classList.add('bounce_out');
+
+        setTimeout(() => {
+            buysnippetback.style.opacity = '0';
+            buysnippetback.style.visibility = 'hidden';
+        }, 700);
+    };
+
+    openit.addEventListener('click', openModal);
+    closebuy.addEventListener('click', closeModal);
+
+    buysnippetback.addEventListener('click', (e) => {
+        if (e.target === buysnippetback) {
+            closeModal();
+        }
+    });
+    
+    morebutton.forEach(button => {
+        button.addEventListener('click', (e) => {
+            e.stopPropagation();
+
+            const card = button.closest('.card');
+            if (card.classList.contains('extended')) {
+                card.classList.remove('extended');
+                button.innerHTML = '<i class="fa-solid fa-chevron-right"></i>';
+                button.classList.remove('active');
+            } else {
+                button.innerHTML = '<i class="fa-solid fa-chevron-left"></i>';
+                card.classList.add('extended');
+                button.classList.add('active');
+                setTimeout(() => {
+                    card.classList.remove('extended');
+                    button.innerHTML = '<i class="fa-solid fa-chevron-right"></i>';
+                    button.classList.remove('active');
+                },10000);
+            }
+        });
+    });
+
+    resultsCardsHolder.addEventListener('click', (e) => {
+        if (e.target === resultsCardsHolder) {
+            const Cards = resultsCardsHolder.querySelectorAll('.results_cards_holder .card');
+            Cards.forEach(card => {
+                const button = card.querySelector('.more_btn');
+                card.classList.remove('extended');
+                button.innerHTML = '<i class="fa-solid fa-chevron-right"></i>';
+                button.classList.remove('active');
+            });
+        }
+    });
+
+    window.addEventListener('scroll', () => {
+        if (window.scrollY >= 4) {
+            logoHolder.classList.add('logo_shadow');
+        } else {
+            logoHolder.classList.remove('logo_shadow');
+        }
+    });
+
+    formbutton.addEventListener('mouseover', () => {
+        formbuttonicon.classList.remove('rotate_it');
+        void formbuttonicon.offsetWidth;
+        formbuttonicon.classList.add('rotate_it');
+    });
+
+    $(window).on("load", function() {
+        setTimeout(function(){
+            $(".loader_holder").fadeOut("slow");
+        },500);
+    });
+
+</script>
+</body>
+</html>
