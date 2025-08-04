@@ -7,6 +7,8 @@ Using docker, i built an image from the folder holding this app (using "docker b
 
 Going on, i had to pull this image from the hub to the web01 and web02 and configure lb01 to distribute the traffic to these two webservers using round robin. Firstly, i cloned the github repo to my local computer and configured compose.yml to pull moviepin app image because docker wouldn't work in those servers(web01 & web02). After i built them images(web01, web02 & lb01), i proceeded with installing haproxy in lb01 then configured haproxy.cfg to distribute traffic using round robin. 
 
+After all of this, i just ran the port of lb01 and it worked perfectly. Distributing the traffic across the images perfectly.
+
 
 <img width="1919" height="1079" alt="Screenshot 2025-08-01 010821" src="https://github.com/user-attachments/assets/4e4ecebb-6d87-4bec-90cd-30e0f9f06ae9" />
 
