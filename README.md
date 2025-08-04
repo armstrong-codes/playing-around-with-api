@@ -1,4 +1,4 @@
-<img width="800" height="196" alt="image" src="https://github.com/user-attachments/assets/998dbb1e-c998-467a-9399-afd151fdeefb" />
+<img width="800" height="296" alt="image" src="https://github.com/user-attachments/assets/998dbb1e-c998-467a-9399-afd151fdeefb" />
 
 This is MoviePin app that use Api to pull out movies data. This data is then transformed into information that will benefit the user who is searching for the best movie to watch.
 
